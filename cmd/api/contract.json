@@ -3,12 +3,13 @@
       "product": {
         "name": "Product Example",
         "barcode" : "90909090909099090909",
-        "price": 25.00,
-        "bandName" : "Brand Name Example LTDA",
+        "price": "25.00",
+        "brandName" : "Brand Name Example LTDA",
         "isVegan": true,
+        "dueDate" : "2040-06-09",
         "measurement" : {
           "code": "LTS",
-          "value" : 1.5
+          "value" : "1.5"
         }
       }
     }
