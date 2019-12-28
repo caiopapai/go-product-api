@@ -39,6 +39,11 @@ func (r *ProductRepository) Save(p *entity.Product) int {
 	return id
 }
 
+//GetByID returns a Product filtered by ID
+func GetByID(id int) entity.Product {
+	return entity.Product{}
+}
+
 //GetByBarcode returns a Product filtered by Barcode
 func GetByBarcode() entity.Product {
 	return entity.Product{}

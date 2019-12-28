@@ -12,11 +12,6 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-func getProduct(c *gin.Context) {
-	c.Header("Content-Type", "application/json")
-	c.String(http.StatusNotImplemented, "TODO")
-}
-
 func saveProduct(c *gin.Context) {
 	c.Header("Content-Type", "application/json")
 
@@ -38,4 +33,34 @@ func saveProduct(c *gin.Context) {
 	response.Data.Product = product
 
 	c.JSON(http.StatusOK, response)
+}
+
+func getProducts(c *gin.Context) {
+	c.Header("Content-Type", "application/json")
+	c.String(http.StatusNotImplemented, "TODO")
+}
+
+func getProduct(c *gin.Context) {
+	c.Header("Content-Type", "application/json")
+	c.String(http.StatusNotImplemented, "TODO")
+}
+
+func getProductByBarcode(c *gin.Context) {
+	c.Header("Content-Type", "application/json")
+	c.String(http.StatusNotImplemented, "TODO")
+}
+
+func getProductByName(c *gin.Context) {
+	c.Header("Content-Type", "application/json")
+	c.String(http.StatusNotImplemented, "TODO")
+}
+
+func deleteByID(c *gin.Context) {
+	c.Header("Content-Type", "application/json")
+	c.String(http.StatusNotImplemented, "TODO")
+}
+
+func updateProduct(c *gin.Context) {
+	c.Header("Content-Type", "application/json")
+	c.String(http.StatusNotImplemented, "TODO")
 }
