@@ -12,23 +12,31 @@ type ProductRepository struct {
 	DB *sql.DB
 }
 
-//Save creates a new product
-func (r *ProductRepository) Save(p *entity.Product) error {
+//Save creates a new product and return ID
+func (r *ProductRepository) Save(p *entity.Product) int {
 
-	sqlStatement := `
-	INSERT INTO pooble.product (name, price,due_date,brand_name,barcode,is_vegan, measurement_value, measurement_code)
-	VALUES ($1, $2, $3, $4, $5, $6, $7, $8)`
+	sqlStatement := ` INSERT INTO pooble.product (name, 
+												  price,
+												  due_date,
+												  brand_name,
+												  barcode,
+												  is_vegan, 
+												  measurement_value, 
+												  measurement_code)
+					  VALUES ($1, $2, $3, $4, $5, $6, $7, $8) 
+					  RETURNING Id`
 
 	id := 0
+
 	err := r.DB.QueryRow(sqlStatement, p.Name, p.Price, p.DueDate, p.BrandName,
-		p.Barcode, p.IsVegan, p.Measurement.Code, p.Measurement.Value).Scan(&id)
+		p.Barcode, p.IsVegan, p.Measurement.Value, p.Measurement.Code).Scan(&id)
 	if err != nil {
 		fmt.Println(err.Error())
-		return err
+		return -1
 	}
 
-	fmt.Println("New record ID is:", id)
-	return nil
+	fmt.Println("New record ID is:", &id)
+	return id
 }
 
 //GetByBarcode returns a Product filtered by Barcode

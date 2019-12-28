@@ -1,4 +1,4 @@
-package api
+package response
 
 import "github.com/caiopapai/go-product-api/cmd/domain/entity"
 
@@ -9,5 +9,6 @@ type Metadata struct {
 
 //Data is the struct that holds the Object
 type Data struct {
-	Product entity.Product `json:"product"`
+	ProductID int            `json:"id"`
+	Product   entity.Product `json:"product"`
 }

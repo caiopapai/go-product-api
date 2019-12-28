@@ -12,6 +12,6 @@ type ProductService struct {
 }
 
 //Save creates a new product
-func (s *ProductService) Save(p *entity.Product) error {
+func (s *ProductService) Save(p *entity.Product) int {
 	return s.Repository.Save(p)
 }
