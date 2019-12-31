@@ -18,8 +18,8 @@ func Router() *gin.Engine {
 	//To serve API
 	router.POST("/products", saveProduct)
 	router.GET("/products", getProducts)
-	router.GET("/products/:id", getProduct)
-	router.GET("/products/:barcode", getProductByBarcode)
+	//router.GET("/products/:id", getProduct)
+	//router.GET("/products/:barcode", getProductByBarcode)
 	router.GET("/products/:name", getProductByName)
 	router.DELETE("/products/:id", deleteByID)
 	router.PUT("/products", updateProduct)
