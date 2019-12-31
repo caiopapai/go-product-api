@@ -6,17 +6,14 @@ import (
 
 	"github.com/caiopapai/go-product-api/cmd/api"
 	"github.com/caiopapai/go-product-api/cmd/api/response"
-	"github.com/caiopapai/go-product-api/cmd/domain/repository"
 	"github.com/caiopapai/go-product-api/cmd/domain/service"
-	"github.com/caiopapai/go-product-api/cmd/infra/connection"
 	"github.com/gin-gonic/gin"
 )
 
 func saveProduct(c *gin.Context) {
 	c.Header("Content-Type", "application/json")
 
-	repo := repository.ProductRepository{DB: connection.GetConnection()}
-	service := service.ProductService{Repository: &repo}
+	service := service.Init()
 
 	var metadata api.Metadata
 
@@ -35,9 +32,11 @@ func saveProduct(c *gin.Context) {
 	c.JSON(http.StatusOK, response)
 }
 
+//get all products
 func getProducts(c *gin.Context) {
+	service := service.Init()
 	c.Header("Content-Type", "application/json")
-	c.String(http.StatusNotImplemented, "TODO")
+	c.JSON(http.StatusOK, service.GetAll())
 }
 
 func getProduct(c *gin.Context) {

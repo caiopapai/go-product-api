@@ -8,10 +8,11 @@ type Product struct {
 	IsVegan     bool        `json:"isVegan"`
 	Price       string      `json:"price"`
 	DueDate     string      `json:"dueDate"`
-	Measurement measurement `json:"measurement"`
+	Measurement Measurement `json:"measurement"`
 }
 
-type measurement struct {
+//Measurement of product
+type Measurement struct {
 	Code  string `json:"code"`
 	Value string `json:"value"`
 }

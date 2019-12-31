@@ -54,9 +54,46 @@ func GetByName() entity.Product {
 	return entity.Product{}
 }
 
-//Get return ALL Products
-func Get() []entity.Product {
-	return []entity.Product{}
+//GetAll return ALL Products
+func (r *ProductRepository) GetAll() []entity.Product {
+
+	rows, err := r.DB.Query("SELECT name, price, due_date, brand_name, barcode, is_vegan, measurement_value, measurement_code FROM pooble.product")
+	if err != nil {
+		panic(err.Error())
+	}
+
+	products := []entity.Product{}
+
+	for rows.Next() {
+		var name string
+		var barcode string
+		var brandname string
+		var isvegan bool
+		var price string
+		var duedate string
+		var mescode string
+		var mesvalue string
+
+		err = rows.Scan(&name, &price, &duedate, &brandname, &barcode, &isvegan, &mesvalue, &mescode)
+		if err != nil {
+			panic(err.Error())
+		}
+		defer rows.Close()
+
+		p := entity.Product{
+			Name:        name,
+			Barcode:     barcode,
+			BrandName:   brandname,
+			DueDate:     duedate,
+			IsVegan:     isvegan,
+			Price:       price,
+			Measurement: entity.Measurement{Code: mescode, Value: mesvalue},
+		}
+
+		products = append(products, p)
+	}
+
+	return products
 }
 
 //Remove one Product
