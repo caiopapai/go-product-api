@@ -28,3 +28,9 @@ func (s *ProductService) Save(p *entity.Product) int {
 func (s *ProductService) GetAll() []entity.Product {
 	return s.Repository.GetAll()
 }
+
+//Remove removes one product
+func (s *ProductService) Remove(id int) {
+	productID := id
+	s.Repository.Remove(productID)
+}

@@ -54,9 +54,9 @@ func getProductByName(c *gin.Context) {
 	c.String(http.StatusNotImplemented, "TODO")
 }
 
-func deleteByID(c *gin.Context) {
+func remove(c *gin.Context) {
 	c.Header("Content-Type", "application/json")
-	c.String(http.StatusNotImplemented, "TODO")
+	c.String(http.StatusOK, "TODO")
 }
 
 func updateProduct(c *gin.Context) {

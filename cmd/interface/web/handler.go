@@ -13,15 +13,14 @@ func Router() *gin.Engine {
 	router.LoadHTMLGlob("interface/template/*")
 	router.GET("/", controller.Index)
 	router.GET("/new", controller.NewProduct)
+	router.GET("/delete", controller.Remove)
 	router.POST("/insert", controller.InsertProduct)
 
 	//To serve API
 	router.POST("/products", saveProduct)
 	router.GET("/products", getProducts)
-	//router.GET("/products/:id", getProduct)
-	//router.GET("/products/:barcode", getProductByBarcode)
 	router.GET("/products/:name", getProductByName)
-	router.DELETE("/products/:id", deleteByID)
+	router.DELETE("/products/:id", remove)
 	router.PUT("/products", updateProduct)
 	return router
 }

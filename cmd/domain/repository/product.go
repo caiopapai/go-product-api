@@ -57,7 +57,7 @@ func GetByName() entity.Product {
 //GetAll return ALL Products
 func (r *ProductRepository) GetAll() []entity.Product {
 
-	rows, err := r.DB.Query("SELECT name, price, due_date, brand_name, barcode, is_vegan, measurement_value, measurement_code FROM pooble.product")
+	rows, err := r.DB.Query("SELECT id, name, price, due_date, brand_name, barcode, is_vegan, measurement_value, measurement_code FROM pooble.product")
 	if err != nil {
 		panic(err.Error())
 	}
@@ -65,22 +65,19 @@ func (r *ProductRepository) GetAll() []entity.Product {
 	products := []entity.Product{}
 
 	for rows.Next() {
-		var name string
-		var barcode string
-		var brandname string
+		var id int
+		var name, barcode, brandname string
 		var isvegan bool
-		var price string
-		var duedate string
-		var mescode string
-		var mesvalue string
+		var price, duedate, mescode, mesvalue string
 
-		err = rows.Scan(&name, &price, &duedate, &brandname, &barcode, &isvegan, &mesvalue, &mescode)
+		err = rows.Scan(&id, &name, &price, &duedate, &brandname, &barcode, &isvegan, &mesvalue, &mescode)
 		if err != nil {
 			panic(err.Error())
 		}
 		defer rows.Close()
 
 		p := entity.Product{
+			ID:          id,
 			Name:        name,
 			Barcode:     barcode,
 			BrandName:   brandname,
@@ -97,8 +94,16 @@ func (r *ProductRepository) GetAll() []entity.Product {
 }
 
 //Remove one Product
-func Remove(p *entity.Product) error {
-	return nil
+func (r *ProductRepository) Remove(id int) {
+	productID := id
+
+	delete, err := r.DB.Prepare("delete from pooble.product where Id=$1")
+	if err != nil {
+		panic(err.Error())
+	}
+
+	delete.Exec(productID)
+	defer r.DB.Close()
 }
 
 //Update one product

@@ -37,6 +37,7 @@
                     <tbody>
                         {{range .}}
                         <tr>
+                            <td>{{.ID}}</td>
                             <td>{{.Name}}</td>
                             <td>{{.Barcode}}</td>
                             <td>{{.BrandName}}</td>
@@ -45,6 +46,7 @@
                             <td>{{.DueDate}}</td>
                             <td>{{.Measurement.Code}}</td>
                             <td>{{.Measurement.Value}}</td>
+                            <td><button onclick="onDelete('{{.ID}}','{{.Name}}')" class="btn btn-danger">Delete</button></td>
                         </tr>
                         {{end}}
                     </tbody>
@@ -56,6 +58,15 @@
         </div>
     </div>
 </body>
+
+<script>
+    function onDelete(id, product) {
+        let resposta = confirm("Do you want remove this product?\n" + "\n" + product )
+        if (resposta) {
+            window.location = "/delete?id=" + id
+        }
+    }
+</script>
 
 </html>
 {{end}}

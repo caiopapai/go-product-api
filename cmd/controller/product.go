@@ -1,6 +1,7 @@
 package controllers
 
 import (
+	"fmt"
 	"log"
 	"net/http"
 	"strconv"
@@ -58,4 +59,16 @@ func InsertProduct(c *gin.Context) {
 
 	c.Redirect(http.StatusMovedPermanently, "/")
 
+}
+
+//Remove one product
+func Remove(c *gin.Context) {
+	id := c.Request.URL.Query().Get("id")
+	productID, err := strconv.Atoi(id)
+	if err != nil {
+		fmt.Println(err.Error())
+	}
+	service := service.Init()
+	service.Remove(productID)
+	c.Redirect(http.StatusMovedPermanently, "/")
 }
