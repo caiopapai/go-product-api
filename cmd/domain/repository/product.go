@@ -40,8 +40,40 @@ func (r *ProductRepository) Save(p *entity.Product) int {
 }
 
 //GetByID returns a Product filtered by ID
-func GetByID(id int) entity.Product {
-	return entity.Product{}
+func (r *ProductRepository) GetByID(id int) entity.Product {
+	rows, err := r.DB.Query("select * from pooble.product where id=$1", id)
+	if err != nil {
+		panic(err.Error())
+	}
+
+	product := entity.Product{}
+
+	for rows.Next() {
+		var id int
+		var name, barcode, brandname string
+		var isvegan bool
+		var price, duedate, mescode, mesvalue string
+
+		err = rows.Scan(&id, &name, &price, &duedate, &brandname, &barcode, &isvegan, &mesvalue, &mescode)
+		if err != nil {
+			panic(err.Error())
+		}
+
+		defer rows.Close()
+
+		product = entity.Product{
+			ID:          id,
+			Name:        name,
+			Barcode:     barcode,
+			BrandName:   brandname,
+			DueDate:     duedate,
+			IsVegan:     isvegan,
+			Price:       price,
+			Measurement: entity.Measurement{Code: mescode, Value: mesvalue},
+		}
+	}
+
+	return product
 }
 
 //GetByBarcode returns a Product filtered by Barcode
@@ -107,6 +139,6 @@ func (r *ProductRepository) Remove(id int) {
 }
 
 //Update one product
-func Update(p *entity.Product) error {
+func (r *ProductRepository) Update(p *entity.Product) error {
 	return nil
 }

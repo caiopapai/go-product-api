@@ -15,6 +15,8 @@ func Router() *gin.Engine {
 	router.GET("/new", controller.NewProduct)
 	router.GET("/delete", controller.Remove)
 	router.POST("/insert", controller.InsertProduct)
+	router.GET("/edit", controller.Edit)
+	router.POST("/update", controller.Update)
 
 	//To serve API
 	router.POST("/products", saveProduct)

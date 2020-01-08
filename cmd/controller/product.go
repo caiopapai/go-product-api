@@ -20,6 +20,25 @@ func Index(c *gin.Context) {
 	c.HTML(http.StatusOK, "Index", products)
 }
 
+//Edit redirect to page for edit a product
+func Edit(c *gin.Context) {
+
+	service := service.Init()
+	qid := c.Request.URL.Query().Get("id")
+	id, err := strconv.Atoi(qid)
+	if err != nil {
+		fmt.Println(err.Error())
+	}
+
+	p := service.GetByID(id)
+	c.HTML(http.StatusOK, "Edit", p)
+}
+
+//Update a product
+func Update(c *gin.Context) {
+	//TODO
+}
+
 //NewProduct redirects to new product page
 func NewProduct(c *gin.Context) {
 	c.HTML(http.StatusOK, "NewProduct", nil)

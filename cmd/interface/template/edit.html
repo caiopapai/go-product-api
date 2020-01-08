@@ -9,47 +9,78 @@
     <body>
         <div class="jumbotron jumbotron-fluid">
             <div class="container">
-                <h1 class="display-5">Editando produto</h1>
-                <p class="lead">Insira os dados para atualizar ou editar</p>
+                <h1 class="display-5">Editing Product</h1>
+                <p class="lead">Insert data to update or edit</p>
             </div>
         </div>
         <form method="POST" action="update">
-            <input type="hidden" name="id" value="{{.Id}}" >
+            <input type="hidden" name="id" value="{{.ID}}" >
             <div class="row">
                 <div class="col-sm-8">
                     <div class="form-group">
-                        <label for="nome">Nome:</label>
-                        <input type="text" name="nome" class="form-control" value="{{.Nome}}">
+                        <label for="name">Name:</label>
+                        <input type="text" name="name" class="form-control" value="{{.Name}}">
                     </div>
                 </div>
             </div>
             <div class="row">
                 <div class="col-sm-8">
                     <div class="form-group">
-                        <label for="descricao">Descrição:</label>
-                        <input type="text" name="descricao" class="form-control" value="{{.Descricao}}">
+                        <label for="barcode">Barcode:</label>
+                        <input type="text" name="barcode" class="form-control" value="{{.Barcode}}">
+                    </div>
+                </div>
+            </div>            
+            <div class="row">
+                <div class="col-sm-8">
+                    <div class="form-group">
+                        <label for="brandname">Brand Name:</label>
+                        <input type="text" name="brandname" class="form-control" value="{{.BrandName}}">
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-8">
+                    <div class="form-group">
+                        <label for="isvegan">Is Vegan?:</label>
+                        <input type="text" name="isvegan" class="form-control" value="{{.IsVegan}}">
+                    </div>
+                </div>
+            </div>            
+            <div class="row">
+                <div class="col-sm-2">
+                    <div class="form-group">
+                        <label for="price">Price:</label>
+                        <input type="number" name="price" class="form-control" step="0.01" value="{{.Price}}">
                     </div>
                 </div>
             </div>
             <div class="row">
                 <div class="col-sm-2">
                     <div class="form-group">
-                        <label for="preco">Preço:</label>
-                        <input type="number" name="preco" class="form-control" step="0.01" value="{{.Preco}}">
+                        <label for="duedate">Due Date:</label>
+                        <input type="text" name="duedate" class="form-control" value="{{.DueDate}}">
                     </div>
                 </div>
             </div>
-
             <div class="row">
                 <div class="col-sm-2">
                     <div class="form-group">
-                        <label for="quantidade">Quantidade:</label>
-                        <input type="number" name="quantidade" class="form-control" value="{{.Quantidade}}">
+                        <label for="mescode">Measurement Code:</label>
+                        <input type="text" name="mescode" class="form-control" step="0.01" value="{{.Measurement.Code}}">
                     </div>
                 </div>
-            </div>
-            <button type="submit" value="salvar" class="btn btn-success">Atualizar</button>
-            <a class="btn btn-info" href="/">Voltar</a>
+            </div>    
+            <div class="row">
+                <div class="col-sm-2">
+                    <div class="form-group">
+                        <label for="mesvalue">Measurement Value:</label>
+                        <input type="text" name="mesvalue" class="form-control" step="0.01" value="{{.Measurement.Value}}">
+                    </div>
+                </div>
+            </div>                     
+            <button type="submit" value="save" class="btn btn-success">Update</button>
+            <a class="btn btn-info" href="/">Back</a>
         </form>
     </body>
 

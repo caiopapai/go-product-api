@@ -34,3 +34,8 @@ func (s *ProductService) Remove(id int) {
 	productID := id
 	s.Repository.Remove(productID)
 }
+
+//GetByID a product by ID
+func (s *ProductService) GetByID(id int) entity.Product {
+	return s.Repository.GetByID(id)
+}
